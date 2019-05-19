@@ -12,9 +12,65 @@ Just include hud.js:
 
 **Note**: include `hud.min.js` for the minified hud.js library
 
+## Introduction
+
+Reason for creating `hud.js` (a heads up display) is to focus on the following:
+
+* it basically is an overlay on top of an HTML element (e.g. a game canvas)
+* positioning HUD elements should be as easy as possible (not by pixels but by "directions")
+
+My aim is always to write libraries which are as unobtrusive as possible.
+
 ## Usage
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Creating an instance
+
+To create a HUD instance, use the `new HUD()` constructor which returns a HUD instance.
+You can pass an options object which the following possible keys:
+
+* `padding` - the amount of pixels which the HUD will apply to pad its components (default: 12 pixels)
+* `el` - the HTML element over which the HUD will be positioned (can either be a CSS selector or HTML element)
+
+```javascript
+  var hud = new HUD({
+    padding: 15,
+    el: '#game'
+  });
+```
+
+You can also "stick" the HUD instance on an HTML element after initialization using the `stickTo` function:
+
+```javascript
+  // using a CSS selector
+  var hud = new HUD();{
+  hud.stickTo('#game');
+
+  // using an HTML element
+  var hud = new HUD();{
+  hud.stickTo(document.getElementById('game'));
+```
+
+You can access the corresponding HUD HTML element using the `el` property: `hud.el`.
+
+### Adding HUD components
+
+To add components to the HUD, use the `instance.<direction>.add()` function:
+
+```javascript
+  var hud = new HUD({el: '#game'});
+
+  hud.nw.add('North West'); // pass a string which will result in a <span>
+  hud.n.add($('<div>North</div>')[0]); // pass an HTML element
+  hud.ne.add('North East');
+  hud.w.add('West');
+  hud.c.add('Center');
+  hud.e.add('East');
+  hud.sw.add('South West');
+  hud.s.add('South');
+  hud.se.add('South East');
+```
+
+See [https://archan937.github.io/hud.js/demo/index.html](https://archan937.github.io/hud.js/demo/index.html) for a live demo.
 
 ## Contact me
 
