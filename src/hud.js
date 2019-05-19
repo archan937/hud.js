@@ -21,6 +21,8 @@ HUD = function(options) {
     containers = 'nw n ne w c e sw s se'.split(' '),
     padding;
 
+  this.el = hud;
+
   this.stickTo = function(el) {
     if (typeof(el) == 'string') {
       el = document.querySelector(el);
@@ -69,8 +71,6 @@ HUD = function(options) {
   if (options.el) {
     this.stickTo(options.el);
   }
-
-  this.el = hud;
 };
 
 (function() {
