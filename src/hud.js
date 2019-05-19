@@ -40,6 +40,12 @@ HUD = function(options) {
     el.appendChild(hud);
   };
 
+  this.empty = function() {
+    containers.forEach(function(container) {
+      this[container].empty();
+    }.bind(this));
+  }.bind(this);
+
   hud.setAttribute('class', 'hud');
   hud.appendChild(wrapper);
 
@@ -64,6 +70,9 @@ HUD = function(options) {
           child.innerHTML = html;
         }
         el.appendChild(child);
+      },
+      empty: function() {
+        el.innerHTML = '';
       }
     };
   }.bind(this));
