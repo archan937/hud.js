@@ -34,30 +34,69 @@
 
       var
         hud = new HUD({el: '.game'}),
+        containers = 'nw n ne w c e sw s se'.split(' '),
         span = function(html) {
           var el = document.createElement('div');
           el.innerHTML = '<span onclick="alert(\'Clicked on ' + html.replace(/<br>/g, '\\n').replace(/\s$/, '') + '!\')">'+ html + '</span>';
           return el.childNodes[0];
+        },
+        addContent = function() {
+          hud.nw.add(span('(nw) '));
+          hud.nw.add(span('North West'));
+          hud.n.add(span('(n) '));
+          hud.n.add(span('North'));
+          hud.ne.add(span('(ne) '));
+          hud.ne.add(span('North East'));
+          hud.w.add(span('(w) '));
+          hud.w.add(span('West'));
+          hud.c.add(span('(c) '));
+          hud.c.add(span('Center'));
+          hud.e.add(span('(e) '));
+          hud.e.add(span('East'));
+          hud.sw.add(span('(sw) '));
+          hud.sw.add(span('South West'));
+          hud.s.add(span('(s) '));
+          hud.s.add(span('South'));
+          hud.se.add(span('(se) '));
+          hud.se.add(span('South East'));
+        },
+        emptyAll = function(callback) {
+          hud.empty();
+          callback && callback();
+        },
+        emptyContainers = function(callback) {
+          var
+            index = 0,
+            empty;
+          empty = function() {
+            var container = containers[index];
+            if (container) {
+              hud[container].empty();
+              index++;
+              setTimeout(empty, 500);
+            } else {
+              callback && callback();
+            }
+          };
+          empty();
+        },
+        run = function() {
+          addContent();
+          setTimeout(function() {
+            emptyContainers(function() {
+              setTimeout(function() {
+                addContent();
+                setTimeout(function() {
+                  emptyAll(function() {
+                    setTimeout(run, 1000);
+                  });
+                }, 1500);
+              }, 500);
+            });
+          }, 1500);
         };
 
-      hud.nw.add(span('(nw) '));
-      hud.nw.add(span('North West'));
-      hud.n.add(span('(n) '));
-      hud.n.add(span('North'));
-      hud.ne.add(span('(ne) '));
-      hud.ne.add(span('North East'));
-      hud.w.add(span('(w) '));
-      hud.w.add(span('West'));
-      hud.c.add(span('(c) '));
-      hud.c.add(span('Center'));
-      hud.e.add(span('(e) '));
-      hud.e.add(span('East'));
-      hud.sw.add(span('(sw) '));
-      hud.sw.add(span('South West'));
-      hud.s.add(span('(s) '));
-      hud.s.add(span('South'));
-      hud.se.add(span('(se) '));
-      hud.se.add(span('South East'));
+      run();
 
     </script>
   </body>
