@@ -70,6 +70,13 @@ To add components to the HUD, use the `instance.<direction>.add()` function:
   hud.se.add('South East');
 ```
 
+### Clearing HUD components
+
+You can remove component by using either of the following:
+
+* `instance.<direction>.empty()` which removes all the components within a certain "direction container"
+* `instance.empty()` which removes all the components within the entire HUD
+
 See [https://archan937.github.io/hud.js/demo/index.html](https://archan937.github.io/hud.js/demo/index.html) for a live demo.
 
 ## Contact me
