@@ -42,11 +42,11 @@ You can also "stick" the HUD instance on an HTML element after initialization us
 
 ```javascript
   // using a CSS selector
-  var hud = new HUD();{
+  var hud = new HUD();
   hud.stickTo('#game');
 
   // using an HTML element
-  var hud = new HUD();{
+  var hud = new HUD();
   hud.stickTo(document.getElementById('game'));
 ```
 
